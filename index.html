@@ -21,7 +21,8 @@
                 url: "http://unknown-13.github.io/jsondata/wtduajax.json",
                 dataType: "json"
             }, function( data ) {
-                jQuery("#ajax_text_container").html( data );
+                console.log(data);
+                jQuery( "#ajax_text_container" ).html( data.text );
                 alert( "Загрузка успешна!" );
             });
         }
