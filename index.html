@@ -17,11 +17,7 @@
 <body>
     <script type="text/javascript">
         function wtdu_ajax_get() {
-            jQuery.ajax({
-                url: "http://unknown-13.github.io/jsondata/wtduajax.json",
-                dataType: "json"
-            }, function( data ) {
-                console.log(data);
+            jQuery.get("http://unknown-13.github.io/jsondata/wtduajax.json", function( data ) {
                 jQuery( "#ajax_text_container" ).html( data.text );
                 alert( "Загрузка успешна!" );
             });
