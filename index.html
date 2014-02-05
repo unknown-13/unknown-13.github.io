@@ -25,7 +25,7 @@
 
         function wtdu_ajax_get_xml() {
             jQuery.get("http://unknown-13.github.io/xmldata/wtduajax.xml", function( data ) {
-                jQuery( "#ajax_xml_container span" ).html( jQuery(data).find("string").text );
+                jQuery( "#ajax_xml_container span" ).html( jQuery(data).find("string").text() );
                 alert( "Загрузка XML успешна!" );
             });
         }
