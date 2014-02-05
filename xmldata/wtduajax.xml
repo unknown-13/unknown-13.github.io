@@ -2,7 +2,7 @@
 <methodResponse>
     <params>
         <param>
-            <value><string>New Text from XML</string></value>
+            <value><string>Ответ с сервера в формате XML!</string></value>
         </param>
     </params>
 </methodResponse>
