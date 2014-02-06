@@ -1,1 +1,3 @@
-#ajax_text_container, #ajax_xml_container span { background-color: #ffffcc }
+div.button_container { margin-top: 20px }
+div.response_container { margin-top: 5px }
+div.response_container span { background-color: #ffc }

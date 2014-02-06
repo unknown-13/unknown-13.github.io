@@ -12,38 +12,92 @@
     <script>window.jQuery || document.write(unescape('%3Cscript src="http://jquery.com/jquery-wp-content/themes/jquery/js/jquery-1.9.1.min.js"%3E%3C/script%3E'))</script>
 
     <title>Test Page</title>
+
+    <script type="text/javascript">
+        jQuery(document).ready (function(){
+            function wtdu_ajax_get_json() {
+                jQuery.get("http://unknown-13.github.io/jsondata/wtduajax.json", function( data ) {
+                    jQuery( "#ajax_text_container span" ).html( data.text );
+                    alert( "Загрузка JSON успешна!" );
+                });
+            }
+            jQuery("#ajax_get_text_button").click(function(){
+                wtdu_ajax_get_json();
+            });
+
+            function wtdu_ajax_get_xml() {
+                jQuery.get("http://unknown-13.github.io/xmldata/wtduajax.xml", function( data ) {
+                    jQuery( "#ajax_xml_container span" ).html( jQuery(data).find("string").text() );
+                    alert( "Загрузка XML успешна!" );
+                });
+            }
+            jQuery("#ajax_get_xml_button").click(function(){
+                wtdu_ajax_get_xml();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        // callback
+        function loadit(data) {
+            // работаем с данными
+            if (!data) {
+                return;
+            }
+            document.getElementById( "ajax_jsonp_container" ).innerHTML = data.text;
+        }
+
+        // здесь будет ссылка на новый элемент script
+        var oElem = null;
+
+        function sendJSONP(url, callback) {
+            if (!url || !callback)
+                return;
+
+            url += '?callback='+callback;
+
+            // выполняем запрос JSONP
+            if (oElem) {
+                oElem.parentNode.removeChild(oElem);
+            }
+
+            oElem = document.createElement('script');
+            oElem.setAttribute('type','text/javascript');
+            document.getElementsByTagName('head')[0].appendChild(oElem);
+            oElem.setAttribute('src', url);
+        }
+
+        window.onload = function(){
+            document.getElementById("ajax_get_jsonp_button").onclick = function(){
+                sendJSONP("http://unknown-13.github.io/javascripts/wtduajax.js", "loadit");
+            }
+        }
+    </script>
+
 </head>
 
 <body>
-    <script type="text/javascript">
-        function wtdu_ajax_get_json() {
-            jQuery.get("http://unknown-13.github.io/jsondata/wtduajax.json", function( data ) {
-                jQuery( "#ajax_text_container span" ).html( data.text );
-                alert( "Загрузка JSON успешна!" );
-            });
-        }
 
-        function wtdu_ajax_get_xml() {
-            jQuery.get("http://unknown-13.github.io/xmldata/wtduajax.xml", function( data ) {
-                jQuery( "#ajax_xml_container span" ).html( jQuery(data).find("string").text() );
-                alert( "Загрузка XML успешна!" );
-            });
-        }
-
-    </script>
-
-    <div id="ajax_get_text_button">
-        <input type="button" value="Получить JSON" onclick="wtdu_ajax_get_json();">
+    <div class="button_container">
+        <input type="button" value="Получить JSON" id="ajax_get_text_button">
     </div>
-    <div id="ajax_text_container">
+    <div id="ajax_text_container" class="response_container">
         <span>Контейнер для JSON</span>
     </div>
 
-    <div id="ajax_get_xml_button">
-        <input type="button" value="Получить XML" onclick="wtdu_ajax_get_xml();">
+    <div class="button_container">
+        <input type="button" value="Получить XML" id="ajax_get_xml_button">
     </div>
-    <div id="ajax_xml_container">
+    <div id="ajax_xml_container" class="response_container">
         <span>Контейнер для XML</span>
+    </div>
+
+    <div class="button_container">
+        <input type="button" value="Получить JSONP" id="ajax_get_jsonp_button">
+    </div>
+    <div id="ajax_jsonp_container" class="response_container">
+        <span>Контейнер для результата JSONP запроса</span>
     </div>
 
 </body>
