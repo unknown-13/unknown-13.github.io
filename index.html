@@ -17,7 +17,7 @@
         jQuery(document).ready (function(){
             function wtdu_ajax_get_json() {
                 jQuery.get("http://unknown-13.github.io/jsondata/wtduajax.json", function( data ) {
-                    jQuery( "#ajax_text_container span" ).html( data.text );
+                    jQuery( "#ajax_text_container" ).html( data.text );
                     alert( "Загрузка JSON успешна!" );
                 });
             }
@@ -27,7 +27,7 @@
 
             function wtdu_ajax_get_xml() {
                 jQuery.get("http://unknown-13.github.io/xmldata/wtduajax.xml", function( data ) {
-                    jQuery( "#ajax_xml_container span" ).html( jQuery(data).find("string").text() );
+                    jQuery( "#ajax_xml_container" ).html( jQuery(data).find("string").text() );
                     alert( "Загрузка XML успешна!" );
                 });
             }
@@ -45,7 +45,8 @@
             if (!data) {
                 return;
             }
-            document.getElementById( "ajax_jsonp_container" ).innerHTML = data.text;
+            document.getElementById( "ajax_jsonp_container").innerHTML = data.text;
+            alert( "Загрузка с помощью JSONP успешна!" );
         }
 
         // здесь будет ссылка на новый элемент script
